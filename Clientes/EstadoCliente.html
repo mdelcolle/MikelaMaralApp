@@ -8,37 +8,47 @@
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <link href="css/mikela.css" rel="stylesheet" />
 
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <title>Estado Cliente</title>
     </head>
     <body class="body">
         
     <div class="container">
            <div id="divDetails">
-           
+            <div class="form-group">
+                <label for="cboClientes" class="control-label">Clientes</label>
+                <select id="cboClientes"  title="Seleccione el Cliente" class="form-control">
+                    <option value="0">Seleccione</option>
+                </select>
+            </div>   
            </div>
-   
-   
     </div>
     <script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="../js/CORS.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            var url = "http://calzado.icaravan.com.ar/MikelaMaral.asmx?op=GetClientes";
+            var url = "http://calzado.icaravan.com.ar/ServiceMobile/_GetClientes";
+             $.ajax({
 
-            $.ajax({
-                url: url,
-                cache: false,
-                type: "POST",
-                success: function (data) {
-                    alert(data);
-                    //$('#divDetails').html(data);
+                            url: url,
+                            type: "POST",
+                            dataType: "json",
+                            success: function (data) {
+
+                               var markup = "";
+                                if (data != null) {
+                                    markup += "<option value='0'>Seleccione</option>";
+                                    for (var x = 0; x < data.length; x++) {
+                                        markup += "<option value=" + data[x].id + ">" + data[x].nombre + "</option>";
+                                    }
+                                    $('#cboClientes').html(markup).show();
+                                }
+
+                            }
 
 
-                },
-                error: function (reponse) {
-                    alert("error : " + reponse);
-                }
-            });
+                        })
+           
 
         });
     </script>
