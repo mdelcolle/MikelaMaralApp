@@ -22,17 +22,25 @@
                 </select>
             </div>   
            </div>
+        <div id="infodiv"></div>
     </div>
     <script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="../js/CORS.js"></script>
     <script type="text/javascript">
+        document.addEventListener("deviceready", appReady, false);  
+        function appReady(){  
+            $("#infodiv").html("Testing JSONP with jQuery");  
+        }  
+   
         $(document).ready(function () {
-            var url = "http://calzado.icaravan.com.ar/ServiceMobile/_GetClientes";
+
+            
+            var url = "http://calzado.icaravan.com.ar/ServiceMobile/_GetClientesMikela";
              $.ajax({
 
                             url: url,
-                            type: "POST",
-                            dataType: "json",
+                            type: "GET",
+                            dataType: "jsonp",
+                            jsonp:"callback",
                             success: function (data) {
 
                                var markup = "";
