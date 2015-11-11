@@ -19,17 +19,28 @@
 </div>
     <script type="text/javascript">
         $(document).on("pageinit", "#aboutPage", function (event) {
-            $.getJSON("http://calzado.icaravan.com.ar/ServiceMobile/_GetClientes",
-        function (data) {
-            var markup = "";
-            if (data != null) {
-                markup += "<option value='0'>Seleccione</option>";
-                for (var x = 0; x < data.length; x++) {
-                    markup += "<option value=" + data[x].id + ">" + data[x].nombre + "</option>";
+           var url = "http://calzado.icaravan.com.ar/ServiceMobile/_GetClientesMikela";
+            $.ajax({
+
+                url: url,
+                type: "GET",
+                dataType: "jsonp",
+                jsonp: "callback",
+                success: function (data) {
+
+                    var markup = "";
+                    if (data != null) {
+                        markup += "<option value='0'>Seleccione</option>";
+                        for (var x = 0; x < data.length; x++) {
+                            markup += "<option value=" + data[x].id + ">" + data[x].nombre + "</option>";
+                        }
+                        $('#cboClientes').html(markup).show();
+                    }
+
                 }
-                $('#cboClientes').html(markup).show();
-            }
-        });
+
+
+            })
         });
 
     </script>
