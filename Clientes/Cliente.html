@@ -1,0 +1,37 @@
+
+<!DOCTYPE html> 
+<html>
+<head>
+	<title>Page Title</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../js/jquery-mobile/jquery.mobile-1.4.5.min.css" />
+	<script src="../js/jquery-1.11.3.min.js"></script>
+	<script src="../js/jquery-mobile/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+<div data-role="page" id="aboutPage" class="jqm-demos" data-quicklinks="true">
+    <div role="main" class="ui-content jqm-content">
+        <div data-demo-html="true">
+		<select id="cboClientes"></select>
+		</div><!--/demo-html -->
+    </div>
+</div>
+    <script type="text/javascript">
+        $(document).on("pageinit", "#aboutPage", function (event) {
+            $.getJSON("http://calzado.icaravan.com.ar/ServiceMobile/_GetClientes",
+        function (data) {
+            var markup = "";
+            if (data != null) {
+                markup += "<option value='0'>Seleccione</option>";
+                for (var x = 0; x < data.length; x++) {
+                    markup += "<option value=" + data[x].id + ">" + data[x].nombre + "</option>";
+                }
+                $('#cboClientes').html(markup).show();
+            }
+        });
+        });
+
+    </script>
+</body>
+</html>

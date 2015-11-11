@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <link href="css/mikela.css" rel="stylesheet" />
 
-    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../js/jquery-mobile/jquery.mobile-1.4.5.css" rel="stylesheet" />
     <title>Estado Cliente</title>
     </head>
     <body class="body">
@@ -24,16 +24,24 @@
            </div>
         <div id="infodiv"></div>
     </div>
-    <script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
+        <form>
+    <input id="filter-for-listview" data-type="search" placeholder="Type to search...">
+</form>
+<ul data-role="listview" data-inset="true" data-filter="true" data-input="#filter-for-listview">
+    <li><a href="#">Acura</a></li>
+    <li><a href="#">Audi</a></li>
+    <li><a href="#">BMW</a></li>
+    <li><a href="#">Cadillac</a></li>
+    <li><a href="#">Ferrari</a></li>
+</ul>
+    <script type="text/javascript" src="../js/jquery-mobile/jquery.mobile-1.4.5.js"></script>
     <script type="text/javascript">
         document.addEventListener("deviceready", appReady, false);
         function appReady() {
             $("#infodiv").html("Testing JSONP with jQuery");
         }
-
-        $(document).ready(function () {
-
-            alert('ENTRE');
+        $(document).on('pageinit', function() {
+           
             var url = "http://calzado.icaravan.com.ar/ServiceMobile/_GetClientesMikela";
             $.ajax({
 
